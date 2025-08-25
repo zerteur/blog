@@ -8,6 +8,8 @@ on:
       - 'Articles/**'
       - 'layouts/**'
       - 'config.*'
+      - 'content/**'
+      - 'themes/**'
   workflow_dispatch:
 
 permissions:
@@ -27,14 +29,15 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
+          hugo-version: '0.148.2'
           extended: true
 
       - name: Clean public directory
         run: rm -rf public
 
       - name: Build Hugo site
-        run: hugo --minify --gc
+        run: hugo --minify --gc --verbose
+        continue-on-error: false
 
       - name: Create .nojekyll file
         run: touch public/.nojekyll
