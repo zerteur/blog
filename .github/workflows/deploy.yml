@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write  # Changed to write to allow pushing to gh-pages
   pages: write
   id-token: write
 
@@ -36,8 +36,7 @@ jobs:
         run: rm -rf public
 
       - name: Build Hugo site
-        run: hugo --minify --gc --verbose
-        continue-on-error: false
+        run: hugo --minify --gc --logLevel debug
 
       - name: Create .nojekyll file
         run: touch public/.nojekyll
