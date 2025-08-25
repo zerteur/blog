@@ -3,33 +3,47 @@ name: Déploiement sur GitHub Pages (Hugo)
 on:
   push:
     branches:
-      - hugo   # déclenche quand tu pushes sur la branche hugo
+      - hugo
     paths:
-      - 'Articles/**'   # ne reconstruit que si des fichiers dans Articles changent
-      - 'layouts/**'    # optionnel : si tu modifies les templates
-      - 'config.*'      # optionnel : si tu modifies la config
-  workflow_dispatch: # déclenche manuellement si besoin
+      - 'Articles/**'
+      - 'layouts/**'
+      - 'config.*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
+          extended: true
 
-      - name: Build site
-        run: hugo --minify
+      - name: Clean public directory
+        run: rm -rf public
+
+      - name: Build Hugo site
+        run: hugo --minify --gc
 
       - name: Create .nojekyll file
-        run: touch public/.nojekyll  # Crée un fichier .nojekyll pour désactiver Jekyll
+        run: touch public/.nojekyll
+
+      - name: Verify public directory contents
+        run: ls -la public/
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
