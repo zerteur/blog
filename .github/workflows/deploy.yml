@@ -1,9 +1,9 @@
-name: Déploiement sur GitHub Pages
+name: Déploiement sur GitHub Pages (Hugo)
 
 on:
   push:
     branches:
-      - main  # déclenche quand tu pushes sur main
+      - hugo   # déclenche quand tu pushes sur la branche hugo
   workflow_dispatch: # déclenche manuellement si besoin
 
 jobs:
@@ -26,3 +26,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+          publish_branch: gh-pages
+          cname: blog.lp-folio.fr
