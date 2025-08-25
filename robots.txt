@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://blog.lp-folio.fr/sitemap.xml
