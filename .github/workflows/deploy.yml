@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - hugo   # déclenche quand tu pushes sur la branche hugo
+    paths:
+      - 'Articles/**'   # ne reconstruit que si des fichiers dans Articles changent
+      - 'layouts/**'    # optionnel : si tu modifies les templates
+      - 'config.*'      # optionnel : si tu modifies la config
   workflow_dispatch: # déclenche manuellement si besoin
 
 jobs:
