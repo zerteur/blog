@@ -1,0 +1,12 @@
+baseURL = "https://blog.lp-folio.fr/"
+languageCode = "fr-fr"
+title = "Mon Blog - Léo PROUDHOM"
+theme = "PaperMod"          
+contentDir = "Articles"
+
+paginate = 10
+enableRobotsTXT = true
+
+[params]
+  author = "Léo PROUDHOM"
+  description = "Un blog de technologies"
