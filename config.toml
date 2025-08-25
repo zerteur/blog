@@ -3,9 +3,11 @@ languageCode = "fr-fr"
 title = "Mon Blog - Léo PROUDHOM"
 theme = "PaperMod"          
 contentDir = "Articles"
-
-paginate = 10
 enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 10
+
 
 [params]
   author = "Léo PROUDHOM"
